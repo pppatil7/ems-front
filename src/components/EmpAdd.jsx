@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { createEmployee } from '../services/EmpService'
+import React, { useEffect, useState } from 'react'
+import { createEmployee, getEmployee } from '../services/EmpService'
 import { useNavigate, useParams } from 'react-router-dom'
 
 const EmpAdd = () => {
@@ -16,7 +16,7 @@ const EmpAdd = () => {
 
   const handleEmpEmail = (e) => setEmpEmail(e.target.value);
 
-  const{empUserId} = useParams();
+  const { empUserId } = useParams();
 
   const [errors, setErrors] = useState({
     empFirstName: '',
@@ -25,6 +25,20 @@ const EmpAdd = () => {
   })
 
   const navigator = useNavigate();
+
+  useEffect(() => {
+    if (empUserId) {
+      getEmployee(empUserId).then((response) => {
+        setEmpFirstName(response.data.empFirstName);
+        setEmpLastName(response.data.empLastName);
+        setEmpEmail(response.data.empEmail);
+      }).catch(error => {
+        console.error(error);
+      })
+    }
+
+
+  }, [empUserId])
 
   function saveEmployee(e) {
     e.preventDefault();
@@ -73,12 +87,12 @@ const EmpAdd = () => {
 
   }
 
-  function pageTitle(){
-     if(empUserId){
-        return <h2 className='text-center' >Update Employee</h2>
-     }else{
+  function pageTitle() {
+    if (empUserId) {
+      return <h2 className='text-center' >Update Employee</h2>
+    } else {
       return <h2 className='text-center' >Add Employee</h2>
-     }
+    }
   }
 
   return (
