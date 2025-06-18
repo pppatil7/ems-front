@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { createEmployee } from '../services/EmpService'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const EmpAdd = () => {
 
@@ -15,6 +15,8 @@ const EmpAdd = () => {
   const handleEmpLastName = (e) => setEmpLastName(e.target.value);
 
   const handleEmpEmail = (e) => setEmpEmail(e.target.value);
+
+  const{empUserId} = useParams();
 
   const [errors, setErrors] = useState({
     empFirstName: '',
@@ -71,12 +73,22 @@ const EmpAdd = () => {
 
   }
 
+  function pageTitle(){
+     if(empUserId){
+        return <h2 className='text-center' >Update Employee</h2>
+     }else{
+      return <h2 className='text-center' >Add Employee</h2>
+     }
+  }
+
   return (
     <div className='container' >
       <br></br>
       <div className='row' >
         <div className='card col-md-6 offset-md-3 offset-md-3' >
-          <h2 className='text-center' >Add Employee</h2>
+          {
+            pageTitle()
+          }
           <div className='card-body'>
             <form>
               <div className='form-group mb-2'>

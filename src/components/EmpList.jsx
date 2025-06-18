@@ -20,7 +20,7 @@ const EmpList = () => {
         navigator('/add-employee')
     }
 
-    function updateEmployee(){
+    function updateEmployee(empUserId){
         navigator(`/edit-employee/${empUserId}`)
     }
 
