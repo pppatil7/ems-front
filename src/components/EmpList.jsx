@@ -21,7 +21,7 @@ const EmpList = () => {
     }
 
     function updateEmployee(){
-        
+        navigator(`/edit-employee/${empUserId}`)
     }
 
     return (
