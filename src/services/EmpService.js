@@ -9,3 +9,5 @@ export const createEmployee = (employee) => axios.post(REST_API_BASE_URL, employ
 export const getEmployee = (empUserId) => axios.get(REST_API_BASE_URL + '/' + empUserId);
 
 export const updateEmployee = (empUserId, employee) => axios.put(REST_API_BASE_URL + '/' + empUserId, employee);
+
+export const deleteEmployee = (empUserId) => axios.delete(REST_API_BASE_URL + '/' + empUserId);
